@@ -1,0 +1,50 @@
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.ext.asyncio import AsyncAttrs
+from .activity import Activity
+#from .addendum import Addendum
+from .bank_account import Bank_Account
+from .bank import Bank
+from .contract import Contract
+from .currency import Currency
+from .delivery_type import Delivery_type
+from .department import Department
+from .employee import Employee
+from .main_phase import Main_phase
+from .main_project import Main_project
+from .measurement_unit import Measurement_unit
+from .partner import Partner
+from .payment_condition import Payment_condition
+from .permission import Permission
+from .pre_contract import Pre_contract
+from .refresh_token import RefreshToken
+from .second_phase import Second_Phase
+from .user_project_permission import UserProjectPermission
+from .user import User
+
+
+
+
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
+
+
+__all__ = ["Base",
+           "Activity",
+           "Bank_Account",
+           "Bank",
+           "Contract",
+           "Currency",
+           "Delivery_type",
+           "Department",
+           "Employee",
+           "Main_phase",
+           "Main_project",
+           "Measurement_unit",
+           "Partner",
+           "Payment_condition",
+           "Permission",
+           "Pre_contract",
+           "RefreshToken",
+           "Second_Phase",
+           "UserProjectPermission",
+           "User"]
