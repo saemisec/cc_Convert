@@ -43,6 +43,7 @@ class Main_project(Base):
     currency: Mapped[Currency] = relationship(back_populates="main_project")
     employee: Mapped[Employee] = relationship(back_populates="main_project")
     pre_contract : Mapped[List["Pre_contract"]] = relationship(back_populates="main_project")
+    cbs_element : Mapped[List["Cbs_element"]] = relationship(back_populates="main_project")
     user_project_permission : Mapped[List["UserProjectPermission"]] = relationship(back_populates="main_project")
     #cbs_relation : relationship("Cbs",back_populates="main_project_relation")
 

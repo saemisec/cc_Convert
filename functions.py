@@ -101,6 +101,41 @@ def insert_new_record(inp_val:list):
     session.bulk_save_objects(inp_val)
     session.commit()
 
+def convert_prj_id_cbs(inp_val:int):
+    if inp_val ==7 :
+        return 1
+    elif inp_val ==8 :
+        return 2
+    elif inp_val ==12 :
+        return 3
+    elif inp_val ==21 :
+        return 4
+    elif inp_val ==13 :
+        return 5
+    elif inp_val ==15 :
+        return 6
+    elif inp_val ==26 :
+        return 8
+    elif inp_val ==28 :
+        return 9
+    elif inp_val ==19 :
+        return 10
+    elif inp_val ==20 :
+        return 11
+    elif inp_val ==22 :
+        return 12
+    elif inp_val ==23 :
+        return 13
+    elif inp_val ==24 :
+        return 14
+    elif inp_val ==25 :
+        return 15
+    elif inp_val ==27 :
+        return 16
+    elif inp_val ==29 :
+        return 17
+    elif inp_val ==30 :
+        return 18
 
 def convert_id(parent_table:str) -> list:
     engine = create_engine(DATABASE_URL)
@@ -153,6 +188,20 @@ def convert_main_phase(inp_val:str)->int:
         return 6
     elif inp_val.upper()=='MB' :
         return 7
+
+def get_parent_id(inp_val:str)->str:
+    if '.' not in inp_val:
+        return 0
+    else:
+        inp_array = inp_val.split('.')
+        inp = inp_array[:-1]
+        dest_str = ''
+        for x in inp:
+            dest_str = x + '.' + dest_str
+        if dest_str[len(dest_str)-1]=='.':
+            dest_str = dest_str[:-1]
+        return dest_str
+
 
 def get_project_type(*args):
     results = ''

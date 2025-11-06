@@ -4,6 +4,8 @@ from .activity import Activity
 #from .addendum import Addendum
 from .bank_account import Bank_Account
 from .bank import Bank
+from .cbs_element import Cbs_element
+from .cbs_type import Cbs_type
 from .contract import Contract
 from .currency import Currency
 from .delivery_type import Delivery_type
@@ -32,6 +34,8 @@ __all__ = ["Base",
            "Activity",
            "Bank_Account",
            "Bank",
+           "Cbs_element",
+           "Cbs_type",
            "Contract",
            "Currency",
            "Delivery_type",
