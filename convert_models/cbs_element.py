@@ -20,3 +20,4 @@ class Cbs_element(Base):
     rev_no : Mapped[int]
     cbs_type : Mapped[Cbs_type] = relationship(back_populates="cbs_element")
     main_project : Mapped[Main_project] = relationship(back_populates="cbs_element")
+    contract_item : Mapped[List["Contract_item"]] = relationship(back_populates="cbs_element")

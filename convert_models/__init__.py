@@ -7,6 +7,7 @@ from .bank import Bank
 from .cbs_element import Cbs_element
 from .cbs_type import Cbs_type
 from .contract import Contract
+from .contract_item import Contract_item
 from .currency import Currency
 from .delivery_type import Delivery_type
 from .department import Department
