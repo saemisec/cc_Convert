@@ -1,5 +1,5 @@
-from convert_models.cbs_element import Cbs_element
-from convert_models.main_project import Main_project
+from models.cbs_element import Cbs_element
+from models.main_project import Main_project
 
 import functions as func
 
@@ -11,8 +11,8 @@ def convert(inp_val:list)->list:
             old_id = row['ElementNo'],
             title = str(row['ElementTitle']).strip(),
             code = row['ElementNum'],
-            local_amount = row['ElPaymentLocal'],
-            foreign_amout = row['ElPaymentForeign'],
+            amount_irr = row['ElPaymentLocal'],
+            amount_cur = row['ElPaymentForeign'],
             main_project_id = func.convert_prj_id_cbs(row['ContractElNo']),
             element_type = 8  if row['ElementType']==9 else row['ElementType'],
             rev_no = row['RevNo'])

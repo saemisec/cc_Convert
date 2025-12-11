@@ -1,5 +1,5 @@
 from functions import insert_new_record,get_old_data
-from convert_models.second_phase import Second_Phase
+from models.second_phase import Second_Phase
 
 
 def second_phase_convert(inp_val:list):

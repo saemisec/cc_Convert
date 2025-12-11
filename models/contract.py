@@ -37,3 +37,7 @@ class Contract(Base):
     delivery_type : Mapped["Delivery_type"] = relationship(back_populates="contract")
     payment_condition : Mapped[List["Payment_condition"]] = relationship(back_populates="contract")
     contract_item : Mapped[List["Contract_item"]] = relationship(back_populates="contract")
+    
+    addenum : Mapped[List["Addenum"]] = relationship(back_populates="contract")
+    statement : Mapped[List["Statement"]] = relationship(back_populates="contract")
+    

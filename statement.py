@@ -1,7 +1,5 @@
-from models.cbs_element import Cbs_element
-from models.main_project import Main_project
 from models.pre_contract import Pre_contract
-from models.contract_item import Contract_item
+from models.statement import Statement
 import functions as func
 
 
@@ -10,23 +8,24 @@ import functions as func
 
 def convert(inp_val:list)->list:
     precontract_id_map = func.convert_id(Pre_contract)
-    cbs_element_id_map = func.convert_id(Cbs_element)
     results = []
     for row in inp_val:
-        element = Contract_item(
+        element = Statement(
+            old_id = row['InvoiceNo'],
             contract_id = precontract_id_map.get(row['CtorContractNo']),
-            cbs_element_id = cbs_element_id_map.get(row['ElementNo']),
-            local_amount = row['PaymentLocal'],
-            foreign_amout = row['PaymentForeign'],
+            amount_irr = row['InvPriceLocal'],
+            amount_cur = row['InvPriceForeign'],
+            number = row['InvoiceNum'],
+            statement_date = func.shamsi_to_miladi(str(row['InvDate']).strip()),
             register_date = func.shamsi_to_miladi(str(row['RegDate']).strip()),
         )
         results.append(element)
     return results
 
 if __name__ == "__main__":
-    old_data = func.get_old_data('select * from ContratorCbsItems')
+    old_data = func.get_old_data('select * from CtorCtInvoice')
     new_data = convert(old_data)
     rr = func.model_list(new_data)
-    #breakpoint()
+    # breakpoint()
     func.insert_new_record(new_data)
     print('Well done.')

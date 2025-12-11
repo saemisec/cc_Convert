@@ -1,7 +1,7 @@
 from typing import List
 from .base import Base
-from convert_models.bank import Bank
-from convert_models.partner import Partner
+from .bank import Bank
+from .partner import Partner
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship,Mapped, mapped_column
 

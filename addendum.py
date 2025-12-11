@@ -1,5 +1,5 @@
-from convert_models.pre_contract import Pre_contract
-from convert_models.addendum import Addendum
+from models.pre_contract import Pre_contract
+from models.addendum import Addendum
 import functions as func
 
 

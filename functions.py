@@ -7,8 +7,8 @@ import re
 from persiantools.jdatetime import JalaliDate
 import datetime
 import csv
-from convert_models.second_phase import Second_Phase
-from convert_models.main_project import Main_project
+from models.second_phase import Second_Phase
+from models.main_project import Main_project
 from dotenv import load_dotenv
 
 load_dotenv()

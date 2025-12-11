@@ -1,8 +1,8 @@
 import enum
-from convert_models.pre_contract import Pre_contract
-from convert_models.partner import Partner
-from convert_models.currency import Currency
-from convert_models.main_project import Main_project
+from models.pre_contract import Pre_contract
+from models.partner import Partner
+from models.currency import Currency
+from models.main_project import Main_project
 import functions as func
 
 class Contract_status(enum.Enum):

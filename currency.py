@@ -1,4 +1,4 @@
-from convert_models.currency import Currency
+from models.currency import Currency
 from functions import insert_new_record,get_old_data
 
 def convert(inp_val:list)->list:

@@ -1,6 +1,6 @@
-from convert_models.contract import Contract
-from convert_models.delivery_type import Delivery_type
-from convert_models.pre_contract import Pre_contract
+from models.contract import Contract
+from models.delivery_type import Delivery_type
+from models.pre_contract import Pre_contract
 import functions as func
 
 def convert(inp_val:list)->list:

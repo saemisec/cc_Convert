@@ -1,12 +1,12 @@
 import datetime
 from typing import List
-from .base import Base
-from convert_models.currency import Currency
-from convert_models.employee import Employee
-from sqlalchemy import Column, Integer, BigInteger, String, Date, ForeignKey,UniqueConstraint
+from models.currency import Currency
+from models.employee import Employee
+from sqlalchemy import BigInteger, String, ForeignKey,UniqueConstraint
 from sqlalchemy.sql import case
-from sqlalchemy.orm import relationship , Mapped, mapped_column, mapped_column
+from sqlalchemy.orm import relationship , Mapped, mapped_column
 from sqlalchemy.ext.hybrid import hybrid_property
+from .base import Base
 
 
 class Main_project(Base):

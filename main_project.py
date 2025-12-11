@@ -1,6 +1,6 @@
-from convert_models.main_project import Main_project
-from convert_models.employee import Employee
-from convert_models.currency import Currency
+from models.main_project import Main_project
+from models.employee import Employee
+from models.currency import Currency
 import functions as func
 
 

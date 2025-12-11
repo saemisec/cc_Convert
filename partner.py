@@ -1,4 +1,4 @@
-from convert_models.partner import Partner
+from models.partner import Partner
 import functions as func
 
 def convert_person(inp_val:list)->list:

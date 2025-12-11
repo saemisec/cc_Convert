@@ -3,7 +3,7 @@ from .base import Base
 from sqlalchemy import String
 from sqlalchemy.orm import relationship,Mapped, mapped_column
 
-#from convert_models.main_project import Main_project
+#from models.main_project import Main_project
 
 class Currency(Base):
     __tablename__ = "currency"

@@ -3,8 +3,6 @@ from .base import Base
 from sqlalchemy import   String
 from sqlalchemy.orm import relationship,Mapped, mapped_column
 
-
-
 class Partner(Base):
     __tablename__ = "partner"
     id : Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)

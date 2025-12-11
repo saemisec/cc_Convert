@@ -1,4 +1,4 @@
-from convert_models.department import Department
+from models.department import Department
 import functions as func
 
 def convert(inp_val:list)->list:

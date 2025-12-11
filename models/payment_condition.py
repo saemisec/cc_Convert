@@ -2,7 +2,7 @@ import datetime
 from .base import Base
 from sqlalchemy import String, ForeignKey,BigInteger
 from sqlalchemy.orm import relationship,Mapped, mapped_column, mapped_column
-from .contract import Contract
+from models.contract import Contract
 
 class Payment_condition(Base):
     __tablename__ = "payment_condition"

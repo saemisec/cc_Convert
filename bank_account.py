@@ -1,6 +1,6 @@
-from convert_models.bank_account import Bank_Account
-from convert_models.partner import Partner
-from convert_models.bank import Bank
+from models.bank_account import Bank_Account
+from models.partner import Partner
+from models.bank import Bank
 import functions as func
 
 

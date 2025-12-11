@@ -1,7 +1,8 @@
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from .activity import Activity
-#from .addendum import Addendum
+from .addenum import Addenum
+from .addenum_item import Addenum_item
 from .bank_account import Bank_Account
 from .bank import Bank
 from .cbs_element import Cbs_element
@@ -21,6 +22,7 @@ from .permission import Permission
 from .pre_contract import Pre_contract
 from .refresh_token import RefreshToken
 from .second_phase import Second_Phase
+from .statement import Statement
 from .user_project_permission import UserProjectPermission
 from .user import User
 
@@ -33,11 +35,14 @@ class Base(AsyncAttrs, DeclarativeBase):
 
 __all__ = ["Base",
            "Activity",
+           "Addenum",
+           "Addenum_item",
            "Bank_Account",
            "Bank",
            "Cbs_element",
            "Cbs_type",
            "Contract",
+           "Contract_item",
            "Currency",
            "Delivery_type",
            "Department",
@@ -45,11 +50,12 @@ __all__ = ["Base",
            "Main_phase",
            "Main_project",
            "Measurement_unit",
-           "Partner",
            "Payment_condition",
+           "Partner",
            "Permission",
            "Pre_contract",
            "RefreshToken",
            "Second_Phase",
+           "Statement",
            "UserProjectPermission",
            "User"]

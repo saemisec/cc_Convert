@@ -1,4 +1,4 @@
-from convert_models.delivery_type import Delivery_type
+from models.delivery_type import Delivery_type
 from functions import insert_new_record,get_old_data
 
 def convert(inp_val:list)->list:

@@ -1,5 +1,5 @@
 from functions import insert_new_record,get_old_data
-from convert_models.bank import Bank
+from models.bank import Bank
 
 
 def bank_convert(inp_val:list):

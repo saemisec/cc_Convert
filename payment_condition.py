@@ -1,5 +1,5 @@
-from convert_models.payment_condition import Payment_condition
-from convert_models.pre_contract import Pre_contract
+from models.payment_condition import Payment_condition
+from models.pre_contract import Pre_contract
 import functions as func
 
 
