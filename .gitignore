@@ -5,6 +5,7 @@ __pycache__/
 **/~$*.docx
 # C extensions
 *.so
+*.xlsx
 Documents/
 cc_frontend_OLD/
 # Distribution / packaging

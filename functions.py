@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 from sqlalchemy import create_engine, select, text
 from sqlalchemy.orm import sessionmaker, Session
 from typing import Type, Dict
@@ -28,6 +29,7 @@ def get_id_map(
 
     result = session.execute(select(old_id_attr, new_id_attr)).all()
     return {old: new for old, new in result}
+
 
 
 def get_bank_account_list():
@@ -95,6 +97,26 @@ def postgres_session() -> sessionmaker:
     return session
 
 
+def svc_parse_item_excel() -> list:
+    file_path = 'ARD_CBS.xlsx'
+    df = pd.read_excel(
+    file_path,
+    engine="openpyxl",
+    )
+    results = []
+    
+    for idx, r in df.iterrows():
+        raw = {
+            "wbs_code": r["wbs_code"],
+            "document_no": r["document_no"],
+        }
+        results.append(raw)
+        # try:
+            # row = CbsItemImportRow(**raw)
+        # except Exception as e:
+            # print(f"Error in row {idx + 2}: {e}")
+    return results
+
 def fetch_mdr_data() -> list:
     sql = text(
         """
@@ -104,6 +126,34 @@ def fetch_mdr_data() -> list:
     )
 
     engine = create_engine(NEW_DATABASE_URL)
+    SessionLocal = sessionmaker(bind=engine)
+    session = SessionLocal()
+    results = session.execute(sql).fetchall()
+    return results
+
+def fetch_mdr_details_data() -> list:
+    sql = text(
+        """
+    SELECT mdr_id,rev,receipt_date,disk_id,files
+    FROM edms_issued_docs where files like '1389-AR-%' and project_id = 6
+    """
+    )
+
+    engine = create_engine(NEW_DATABASE_URL)
+    SessionLocal = sessionmaker(bind=engine)
+    session = SessionLocal()
+    results = session.execute(sql).fetchall()
+    return results
+
+def fetch_cbs_data() -> list:
+    sql = text(
+        """
+    SELECT id,wbs_code 
+    FROM cbs_element
+    """
+    )
+
+    engine = create_engine(DATABASE_URL)
     SessionLocal = sessionmaker(bind=engine)
     session = SessionLocal()
     results = session.execute(sql).fetchall()

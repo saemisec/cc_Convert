@@ -33,6 +33,7 @@ from .user_position import User_position
 from .user import User
 
 
+
 class Base(AsyncAttrs, DeclarativeBase):
     pass
 
@@ -70,4 +71,20 @@ __all__ = [
     "Statement",
     "User_position",
     "User",
+    "SupAgreement",
+    "SupAgreementType",
+    "SupAmendment",
+    "SupContractType",
+    "SupContractor",
+    "SupCostType",
+    "SupCountry",
+    "SupDeductionAgr",
+    "SupEmployer",
+    "SupMainCorp",
+    "SupMainPrj",
+    "SupMoein",
+    "SupStatement",
+    "SupStatementItem",
+    "SupVouchStat",
+    "SupVoucher",
 ]

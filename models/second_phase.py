@@ -12,5 +12,3 @@ class Second_Phase(Base):
     pre_contract: Mapped[List["Pre_contract"]] = relationship(
         back_populates="second_phase"
     )
-    
-    __table_args__ = (UniqueConstraint("name", name="uq_second_phase_name"),)
