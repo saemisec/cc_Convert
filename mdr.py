@@ -25,13 +25,26 @@ def convert(inp_val: list) -> list:
     cbs_data = fetch_cbs_data()
     excel_data = svc_parse_item_excel()
     for row in inp_val:
+        cbs_id = None
+        wbs_code = [x for x in excel_data if str(x["document_no"]).strip() == str(row.document_no).strip()]
+        if wbs_code is not None and len(wbs_code) > 0:
+            wbs_code = wbs_code[0]["wbs_code"]
+            cbs_id = [x for x in cbs_data if x.wbs_code == wbs_code]
+            if cbs_id is not None and len(cbs_id) > 0:
+                cbs_id = cbs_id[0].id
+            else:
+                print(f"No CBS ID found for WBS code: {wbs_code}")
+                cbs_id = None
+        else:
+            wbs_code = ""
         element = Mdr(
             main_project_id=12,
             document_no=str(row.document_no).strip(),
-            cbs_element_id = get_cbs_id(row.document_no,excel_data,cbs_data,),
+            cbs_element_id = cbs_id,
             title=str(row.title).strip(),
             type=str(row.type).strip(),
             last_rev=str(row.last_rev).strip(),
+            last_status=str(row.last_status).strip(),
             discipline=(row.discipline).strip(),
         )
         results.append(element)

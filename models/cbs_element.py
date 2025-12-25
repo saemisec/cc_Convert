@@ -1,6 +1,6 @@
 from datetime import date
 from decimal import Decimal
-from typing import TYPE_CHECKING, List
+from typing import List
 from sqlalchemy import (
     Boolean,
     Numeric,
@@ -9,14 +9,9 @@ from sqlalchemy import (
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-
-from models.mdr import Mdr
 from .cbs_type import Cbs_type
 from .main_project import Main_project
 from .base import Base
-
-if TYPE_CHECKING:
-    from models.mdr import Mdr
 
 
 class Cbs_element(Base):
@@ -52,8 +47,8 @@ class Cbs_element(Base):
     contract_item: Mapped[List["Contract_item"]] = relationship(
         back_populates="cbs_element"
     )
-    mdr: Mapped[List["Mdr"]] = relationship(back_populates="cbs_element")
 
     cbs_element_history: Mapped[List["Cbs_element_history"]] = relationship(
         back_populates="cbs_element"
     )
+    mdr: Mapped[List["Mdr"]] = relationship(back_populates="cbs_element")

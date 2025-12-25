@@ -1,6 +1,6 @@
 import datetime
 from typing import TYPE_CHECKING
-from sqlalchemy import String, ForeignKey, Date, Text, UniqueConstraint
+from sqlalchemy import String, ForeignKey, Date, UniqueConstraint
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from models.base import Base
 
@@ -16,9 +16,9 @@ class Mdr_details(Base):
     rev: Mapped[str] = mapped_column(String(20))
     receipt_date: Mapped[datetime.date | None] = mapped_column(Date)
     disk_id: Mapped[str] = mapped_column(String(4))
-    files: Mapped[str] = mapped_column(Text)
+    files: Mapped[str] = mapped_column(String(100))
     
-    __table_args__ = (UniqueConstraint("mdr_id",  name="uq_mdr_details_id_rev"),)
+    __table_args__ = (UniqueConstraint("mdr_id", "rev", name="uq_mdr_details_id_rev"),)
 
     # Relationship
     mdr: Mapped["Mdr"] = relationship(back_populates="mdr_details")

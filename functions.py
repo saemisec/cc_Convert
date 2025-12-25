@@ -120,7 +120,7 @@ def svc_parse_item_excel() -> list:
 def fetch_mdr_data() -> list:
     sql = text(
         """
-    SELECT document_no ,title ,discipline ,last_rev,type 
+    SELECT document_no ,title ,discipline ,last_rev,type,last_status
     FROM edms_mdr where project_id = 6 and document_no like '1389-AR-%'
     """
     )
@@ -148,7 +148,7 @@ def fetch_mdr_details_data() -> list:
 def fetch_cbs_data() -> list:
     sql = text(
         """
-    SELECT id,wbs_code 
+    SELECT id,wbs_code
     FROM cbs_element
     """
     )

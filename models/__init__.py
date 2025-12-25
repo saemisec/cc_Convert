@@ -15,6 +15,7 @@ from .delivery_type import Delivery_type
 from .department import Department
 from .employee import Employee
 from .form_entity import Form_Entity
+from .good import Good
 from .main_addendum import Main_addendum
 from .main_phase import Main_phase
 from .main_project import Main_project
@@ -26,12 +27,12 @@ from .payment_condition import Payment_condition
 from .permission import Permission
 from .position import Position
 from .pre_contract import Pre_contract
+from .project_demand import Project_demand
 from .refresh_token import RefreshToken
 from .second_phase import Second_Phase
 from .statement import Statement
 from .user_position import User_position
 from .user import User
-
 
 
 class Base(AsyncAttrs, DeclarativeBase):
@@ -55,6 +56,7 @@ __all__ = [
     "Department",
     "Employee",
     "Form_Entity",
+    "Good",
     "Main_addendum",
     "Main_phase",
     "Main_project",
@@ -66,25 +68,10 @@ __all__ = [
     "Permission",
     "Position",
     "Pre_contract",
+    "Project_demand",
     "RefreshToken",
     "Second_Phase",
     "Statement",
     "User_position",
     "User",
-    "SupAgreement",
-    "SupAgreementType",
-    "SupAmendment",
-    "SupContractType",
-    "SupContractor",
-    "SupCostType",
-    "SupCountry",
-    "SupDeductionAgr",
-    "SupEmployer",
-    "SupMainCorp",
-    "SupMainPrj",
-    "SupMoein",
-    "SupStatement",
-    "SupStatementItem",
-    "SupVouchStat",
-    "SupVoucher",
 ]
