@@ -12,4 +12,4 @@ class Measurement_unit(Base):
     code: Mapped[str] = mapped_column(String(10), unique=True)
     is_nemeric: Mapped[bool]
 
-    good: Mapped[List["Good"]] = relationship(back_populates="measurement_unit")
+    # mr_items: Mapped[List["MrItem"]] = relationship(back_populates="uom")

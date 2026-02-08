@@ -10,4 +10,4 @@ class Department(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
     old_id: Mapped[int | None]
     name: Mapped[str] = mapped_column(String(20), unique=True)
-    position: Mapped[List["Position"]] = relationship(back_populates="department")
+    # position: Mapped[List["Position"]] = relationship(back_populates="department")

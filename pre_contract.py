@@ -10,6 +10,10 @@ class Contract_status(enum.Enum):
     CANCELED = "Canceled"
     TOCONTRACT = "ToContract"
 
+
+
+
+
 def convert(inp_val:list)->list:
     results = []
     partner_id_map = func.convert_id(Partner)
@@ -44,10 +48,23 @@ def convert(inp_val:list)->list:
         results.append(element)
     return results
 
+def merge_lists_by_key(list1, list2, key1, key2):
+    map2 = {item[key2]: item for item in list2}
+    merged = []
+    for item1 in list1:
+        key_val = item1[key1]
+        if key_val in map2:
+            merged_item = {**item1, **map2[key_val]}
+            merged.append(merged_item)
+    return merged
+
 if __name__ == "__main__":
-    old_data = func.get_old_data('select * from ContractorRequestNum')
-    new_data = convert(old_data)
-    rr = func.model_list(new_data)
-    func.insert_new_record(new_data)
+    old_data_request_num = func.get_old_data('select * from ContractorRequestNum')
+    old_data_contractor = func.get_old_data('select * from ContractorContracts')
+    merged_data = merge_lists_by_key(old_data_request_num, old_data_contractor, 'RequestNo', 'CtorContractNo')
+    breakpoint()
+    # new_data = convert(old_data)
+    # rr = func.model_list(new_data)
+    # func.insert_new_record(new_data)
     print('Well done.')
 

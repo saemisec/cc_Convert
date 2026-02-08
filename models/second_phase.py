@@ -12,3 +12,6 @@ class Second_Phase(Base):
     pre_contract: Mapped[List["Pre_contract"]] = relationship(
         back_populates="second_phase"
     )
+    # purchase_requests: Mapped[List["Purchase_request"]] = relationship(
+    #     back_populates="second_phase"
+    # )

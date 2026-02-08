@@ -3,6 +3,7 @@ from decimal import Decimal
 from sqlalchemy import (
     BigInteger,
     ForeignKey,
+    Identity,
     Numeric,
 )
 from sqlalchemy.orm import relationship, Mapped, mapped_column
@@ -12,9 +13,7 @@ from .base import Base
 
 class Cbs_element_history(Base):
     __tablename__ = "cbs_element_history"
-    id: Mapped[int] = mapped_column(
-        BigInteger, primary_key=True, index=True, autoincrement=True
-    )
+    id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True, index=True)
     cbs_element_id: Mapped[int] = mapped_column(
         ForeignKey("cbs_element.id"), index=True
     )
@@ -22,6 +21,6 @@ class Cbs_element_history(Base):
     amount_cur: Mapped[Decimal] = mapped_column(Numeric(18, 2))
     rev_no: Mapped[int]
     revision_date: Mapped[datetime.date]
-    cbs_element: Mapped[Cbs_element] = relationship(
-        back_populates="cbs_element_history"
-    )
+    # cbs_element: Mapped[Cbs_element] = relationship(
+    #     back_populates="cbs_element_history"
+    # )

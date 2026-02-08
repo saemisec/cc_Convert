@@ -6,8 +6,3 @@ from sqlalchemy.ext.asyncio import AsyncAttrs
 
 class Base(AsyncAttrs, DeclarativeBase):
     pass
-
-
-#    __abstract__ = True
-#    id = Column(Integer, primary_key=True, autoincrement=True)
-#    name = Column(String(64), nullable=False)

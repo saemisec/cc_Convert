@@ -51,15 +51,32 @@ class Main_project(Base):
     pre_contract: Mapped[List["Pre_contract"]] = relationship(
         back_populates="main_project"
     )
-    main_addendum: Mapped[List["Main_addendum"]] = relationship(
-        back_populates="main_project", lazy="selectin"
-    )
+
     cbs_element: Mapped[List["Cbs_element"]] = relationship(
         back_populates="main_project"
     )
 
-    permission: Mapped[List["Permission"]] = relationship(back_populates="main_project")
+    # permission: Mapped[List["Permission"]] = relationship(back_populates="main_project")
     mdr: Mapped[List["Mdr"]] = relationship(back_populates="main_project")
+    project_demands: Mapped[List["Project_demand"]] = relationship(
+        back_populates="project"
+    )
+
+    demand_documents: Mapped[List["Demand_document"]] = relationship(
+        back_populates="project"
+    )
+
+    main_addendum: Mapped[List["Main_addendum"]] = relationship(
+        back_populates="main_project", lazy="selectin"
+    )
+    # purchase_requests: Mapped[List["Purchase_request"]] = relationship(
+    #     back_populates="main_project"
+    # )
+    # tenders: Mapped[List["Tender"]] = relationship(back_populates="main_project")
+    # inqueries: Mapped[List["Inquery"]] = relationship(back_populates="main_project")
+    # tbe_requests: Mapped[List["TBE_Request"]] = relationship(
+    #     back_populates="main_project"
+    # )
 
     @hybrid_property
     def status(self):

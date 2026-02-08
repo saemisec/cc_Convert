@@ -1,8 +1,7 @@
 import datetime
 from decimal import Decimal
-from typing import List
 import enum
-from sqlalchemy import Numeric, String, ForeignKey
+from sqlalchemy import Date, Numeric, String, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .base import Base
 
@@ -27,7 +26,9 @@ class Contract(Base):
     bank_account_id: Mapped[int] = mapped_column(ForeignKey("bank_account.id"))
     start_date: Mapped[datetime.date]
     end_date: Mapped[datetime.date | None]
-    registration_date: Mapped[datetime.date]
+    registration_date: Mapped[datetime.date] = mapped_column(
+        Date, default=datetime.date.today
+    )
     duration: Mapped[int]
     good_job_percent: Mapped[Decimal | None] = mapped_column(Numeric(5, 2))
     prepayment_irr: Mapped[Decimal | None] = mapped_column(Numeric(18, 2))
@@ -37,10 +38,6 @@ class Contract(Base):
     desc: Mapped[str | None] = mapped_column(String(500))
     contract_rate: Mapped[Contract_rate]
     cbs_assign: Mapped[bool] = mapped_column(default=False, nullable=True)
-
     pre_contract: Mapped["Pre_contract"] = relationship(back_populates="contract")
     bank_account: Mapped["Bank_Account"] = relationship(back_populates="contract")
     delivery_type: Mapped["Delivery_type"] = relationship(back_populates="contract")
-    payment_condition: Mapped[List["Payment_condition"]] = relationship(
-        back_populates="contract"
-    )
