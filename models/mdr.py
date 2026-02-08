@@ -49,6 +49,3 @@ class Mdr(Base):
     related_mr_items: Mapped[List["MrItem"]] = relationship(
         foreign_keys="[MrItem.related_datasheet_id]", back_populates="related_datasheet"
     )
-    mdr_extra_cost: Mapped[List["MdrExtraCost"]] = relationship(
-        foreign_keys="[MdrExtraCost.mdr_id]", back_populates="mdr"
-    )

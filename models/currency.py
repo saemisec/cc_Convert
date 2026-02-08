@@ -9,7 +9,7 @@ class Currency(Base):
     id: Mapped[int] = mapped_column(primary_key=True, index=True, autoincrement=True)
     old_id: Mapped[int | None]
     name: Mapped[str] = mapped_column(String(20), unique=True)
-    pre_contract: Mapped[List["Pre_contract"]] = relationship(
+    contracts: Mapped[List["Contract"]] = relationship(
         back_populates="currency", lazy="selectin"
     )
     main_project: Mapped[List["Main_project"]] = relationship(

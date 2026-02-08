@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 if TYPE_CHECKING:
     from .bank_account import Bank_Account
-    from .pre_contract import Pre_contract
+    from .contract import Contract
     from .bidder_list import Bidder_list
 
 
@@ -25,7 +25,7 @@ class Partner(Base):
     bank_account: Mapped[List["Bank_Account"]] = relationship(
         back_populates="partner", lazy="selectin"
     )
-    pre_contract: Mapped[List["Pre_contract"]] = relationship(
+    contracts: Mapped[List["Contract"]] = relationship(
         back_populates="partner", lazy="selectin"
     )
     bidder_lists: Mapped[List["Bidder_list"]] = relationship(back_populates="partner")

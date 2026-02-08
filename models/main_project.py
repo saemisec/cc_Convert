@@ -1,6 +1,6 @@
 import datetime
 from decimal import Decimal
-from typing import List
+from typing import TYPE_CHECKING, List
 from sqlalchemy import Numeric, String, ForeignKey, UniqueConstraint
 from sqlalchemy.sql import case
 from sqlalchemy.orm import relationship, Mapped, mapped_column
@@ -8,6 +8,10 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from models.currency import Currency
 from models.employee import Employee
 from .base import Base
+
+if TYPE_CHECKING:
+    from .permission import Permission
+    from .contract import Contract
 
 
 class Main_project(Base):
@@ -48,15 +52,13 @@ class Main_project(Base):
     __table_args__ = (UniqueConstraint("Abbreviation", name="uq_Abbreviation"),)
     currency: Mapped[Currency] = relationship(back_populates="main_project")
     employee: Mapped[Employee] = relationship(back_populates="main_project")
-    pre_contract: Mapped[List["Pre_contract"]] = relationship(
-        back_populates="main_project"
-    )
+    contracts: Mapped[List["Contract"]] = relationship(back_populates="main_project")
 
     cbs_element: Mapped[List["Cbs_element"]] = relationship(
         back_populates="main_project"
     )
 
-    # permission: Mapped[List["Permission"]] = relationship(back_populates="main_project")
+    permission: Mapped[List["Permission"]] = relationship(back_populates="main_project")
     mdr: Mapped[List["Mdr"]] = relationship(back_populates="main_project")
     project_demands: Mapped[List["Project_demand"]] = relationship(
         back_populates="project"

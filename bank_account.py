@@ -12,7 +12,7 @@ def convert(inp_val:list)->list:
         element = Bank_Account(
             account_number = str(row['AccountNo']).strip(),
             bank_id = bank_id_map.get(row['BankNo']),
-            parter_id = partner_id_map.get(row['ContractorNo']),
+            partner_id = partner_id_map.get(row['ContractorNo']),
             is_default = False,
             desc = str(row['AccDes']).strip())
         results.append(element)

@@ -1,38 +1,46 @@
-import datetime
+import enum
 from decimal import Decimal
-from typing import List
-from sqlalchemy import Date, Identity, Numeric, BigInteger, ForeignKey
+from typing import TYPE_CHECKING
+from sqlalchemy import String, Numeric, ForeignKey, Identity
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from .cbs_element import Cbs_element
-from .pre_contract import Pre_contract
 from .base import Base
 
+if TYPE_CHECKING:
+    from .contract import Contract
 
-class Contract_item(Base):
+
+class Item_Type(enum.Enum):
+    """نوع آیتم قرارداد - Contract Item Type"""
+
+    MAIN_ITEM = "MAIN_ITEM"
+    SPARE_PART = "SPARE_PART"
+    EXTRA_COST = "EXTRA_COST"
+
+
+class Contract_Item(Base):
+    """مدل آیتم‌های پیمان - Contract Items model"""
+
     __tablename__ = "contract_item"
-    id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True, index=True)
-    cbs_element_id: Mapped[int] = mapped_column(
-        ForeignKey("cbs_element.id"), index=True
-    )
-    contract_id: Mapped[int] = mapped_column(ForeignKey("pre_contract.id"), index=True)
-    local_amount: Mapped[Decimal] = mapped_column(Numeric(18, 2))
-    foreign_amout: Mapped[Decimal] = mapped_column(Numeric(18, 2))
-    register_date: Mapped[datetime.date] = mapped_column(
-        Date, default=datetime.date.today
-    )
-    # project_demand_id: Mapped[int | None] = mapped_column(
-    #     ForeignKey("project_demand.id"), index=True, nullable=True
-    # )
 
-    # Relationships
-    # cbs_element: Mapped[Cbs_element] = relationship(back_populates="contract_item")
-    # pre_contract: Mapped[Pre_contract] = relationship(back_populates="contract_item")
-    # contract_item_history: Mapped[List["Contract_item_history"]] = relationship(
-    #     back_populates="contract_item"
-    # )
-    # project_demand: Mapped["Project_demand"] = relationship(
-    #     back_populates="contract_items"
-    # )
-    # statement_items: Mapped[List["Statement_items"]] = relationship(
-    #     back_populates="contract_item"
-    # )
+    # Primary key with Identity
+    id: Mapped[int] = mapped_column(Identity(always=True), primary_key=True, index=True)
+
+    # Foreign key to contract
+    contract_id: Mapped[int] = mapped_column(ForeignKey("contract.id"), index=True)
+
+    # Fields
+    title: Mapped[str] = mapped_column(String(200))
+    description: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    item_type: Mapped[Item_Type]
+    quantity: Mapped[Decimal] = mapped_column(Numeric(18, 2))
+    unit_price_irr: Mapped[Decimal] = mapped_column(Numeric(18, 2))
+    unit_price_cur: Mapped[Decimal | None] = mapped_column(
+        Numeric(18, 2), nullable=True
+    )
+    total_price_irr: Mapped[Decimal] = mapped_column(Numeric(18, 2))
+    total_price_cur: Mapped[Decimal | None] = mapped_column(
+        Numeric(18, 2), nullable=True
+    )
+
+    # Relationship
+    contract: Mapped["Contract"] = relationship(back_populates="contract_items")

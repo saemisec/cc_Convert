@@ -1,8 +1,12 @@
-from typing import Optional, List
+from typing import TYPE_CHECKING, List
 from sqlalchemy import Identity, String, ForeignKey, Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from models.user import User
 from .base import Base
+
+if TYPE_CHECKING:
+    from .user import User
+    from .position import Position
+    from .permission import Permission
 
 
 class User_position(Base):

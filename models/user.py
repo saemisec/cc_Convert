@@ -1,7 +1,11 @@
-from typing import Optional, List
+from typing import TYPE_CHECKING, Optional, List
 from sqlalchemy import Identity, String, Boolean, UniqueConstraint
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .base import Base
+
+if TYPE_CHECKING:
+    from .user_position import User_position
+    from .refresh_token import RefreshToken
 
 
 class User(Base):
@@ -14,7 +18,7 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_management: Mapped[bool] = mapped_column(Boolean, default=True)
     refresh_token: Mapped[List["RefreshToken"]] = relationship(back_populates="user")
-    # user_position: Mapped[List["User_position"]] = relationship(back_populates="user")
+    user_position: Mapped[List["User_position"]] = relationship(back_populates="user")
 
     # ledgers: Mapped[List["Ledger"]] = relationship(
     #     foreign_keys="Ledger.created_by", back_populates="creator"

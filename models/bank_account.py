@@ -1,9 +1,12 @@
-from typing import List
+from typing import TYPE_CHECKING, List
 from sqlalchemy import String, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .bank import Bank
 from .partner import Partner
 from .base import Base
+
+if TYPE_CHECKING:
+    from .contract import Contract
 
 
 class Bank_Account(Base):
@@ -16,7 +19,7 @@ class Bank_Account(Base):
     partner_id: Mapped[int] = mapped_column(ForeignKey("partner.id"), index=True)
     bank: Mapped[Bank] = relationship(back_populates="bank_account")
     partner: Mapped[Partner] = relationship(back_populates="bank_account")
-    contract: Mapped[List["Contract"]] = relationship(back_populates="bank_account")
+    contracts: Mapped[List["Contract"]] = relationship(back_populates="bank_account")
 
     __table_args__ = (
         UniqueConstraint(

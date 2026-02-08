@@ -1,6 +1,6 @@
 import datetime
 from typing import TYPE_CHECKING, List
-from sqlalchemy import Date, String, ForeignKey, Identity, Boolean
+from sqlalchemy import Date, String, ForeignKey, Identity, Boolean, JSON
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .base import Base
 
@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from models.main_project import Main_project
     from models.bidder_list import Bidder_list
     from models.tender_extra_cost import Tender_Extra_Cost
+    from models.contract import Contract
 
 
 class Demand_document(Base):
@@ -34,6 +35,16 @@ class Demand_document(Base):
         Boolean, default=False, server_default="false"
     )
 
+    # Self-referencing foreign key to track document chain (e.g., Purchase Order → Tender → Contract Request)
+    parent_id: Mapped[int | None] = mapped_column(
+        ForeignKey("demand_document.id"), index=True, nullable=True
+    )
+
+    # فیلد JSON برای ذخیره موقت داده‌های اعلام برنده مناقصه
+    winner_announcement_data: Mapped[dict | None] = mapped_column(
+        JSON, nullable=True, default=None
+    )
+
     # Relationships
     document_type: Mapped["Demand_document_type"] = relationship(
         back_populates="demand_documents"
@@ -52,6 +63,17 @@ class Demand_document(Base):
     tender_extra_costs: Mapped[List["Tender_Extra_Cost"]] = relationship(
         back_populates="tender"
     )
+
+    # Self-referencing relationship for document chain
+    parent: Mapped["Demand_document | None"] = relationship(
+        remote_side=[id], back_populates="children", foreign_keys=[parent_id]
+    )
+    children: Mapped[List["Demand_document"]] = relationship(
+        back_populates="parent", foreign_keys="Demand_document.parent_id"
+    )
+
+    # Contracts created from this demand_document
+    contracts: Mapped[List["Contract"]] = relationship(back_populates="demand_document")
 
     # purchase_request: Mapped["Purchase_request"] = relationship(
     #     back_populates="demand_document", uselist=False
